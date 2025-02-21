@@ -14,7 +14,7 @@ st.set_page_config(
 )
 
 # Load Model
-with open("Customer_Churn_Predictions.pkl", "rb") as f:
+with open("Customer_Churn_Predictions_models.pkl", "rb") as f:
     model = pickle.load(f)
 
 # Get feature names
