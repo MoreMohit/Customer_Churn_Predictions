@@ -1,0 +1,6 @@
+steps:
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['app', 'deploy', '--quiet']
+
+images:
+  - 'gcr.io/propane-nomad-451309-f1/customer-churn-app'
