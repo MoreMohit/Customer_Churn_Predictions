@@ -1,6 +1,12 @@
 steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/propane-nomad-451309-f1/customer-churn-app', '.']
+  
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/propane-nomad-451309-f1/customer-churn-app']
+  
   - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['app', 'deploy', '--quiet']
+    args: ['run', 'deploy', 'customer-churn-app', '--image', 'gcr.io/propane-nomad-451309-f1/customer-churn-app', '--platform', 'managed', '--region', 'asia-south1', '--allow-unauthenticated']
 
 images:
   - 'gcr.io/propane-nomad-451309-f1/customer-churn-app'
