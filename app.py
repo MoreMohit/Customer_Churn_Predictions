@@ -1,22 +1,24 @@
+import streamlit as st
+# ==================== 🎨 Streamlit UI Config ====================
+st.set_page_config(page_title="Customer Churn Prediction", page_icon="🔑", layout="centered")
+
+
 import os
 import json
-import base64
 import google.auth
 from google.cloud import secretmanager
 import firebase_admin
 from firebase_admin import credentials, auth, exceptions
-import streamlit as st
 from streamlit_extras.colored_header import colored_header
 from streamlit_lottie import st_lottie
 import requests
 
+
 # ==================== 🔥 Securely Load Firebase Credentials ====================
 def get_firebase_credentials():
     """Retrieves Firebase credentials securely from Google Secret Manager."""
-    secret_name = os.getenv("FIREBASE_SECRET_NAME")  # Get secret name from app.yaml
-    if not secret_name:
-        raise ValueError("🔥 Firebase secret name not set!")
-
+    secret_name = os.getenv("FIREBASE_SECRET_NAME", "firebase-creds")  # Default to "firebase-creds"
+    
     try:
         # Authenticate with Google Cloud
         _, project = google.auth.default()
@@ -40,9 +42,6 @@ if not firebase_admin._apps:
         firebase_admin.initialize_app(cred)
     else:
         st.error("🔥 Firebase credentials missing! Check Google Secret Manager.")
-
-# ==================== 🎨 Streamlit UI Config ====================
-st.set_page_config(page_title="Customer Churn Prediction", page_icon="🔑", layout="centered")
 
 # ==================== 🎬 Load Lottie Animations ====================
 def load_lottie_url(url):
