@@ -17,3 +17,9 @@ seaborn
 plotly
 streamlit-lottie  # For Lottie animations
 requests  # Fetch Lottie animations
+
+
+google-auth
+google-auth-oauthlib
+google-auth-httplib2
+firebase-admin
