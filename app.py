@@ -1,66 +1,59 @@
-import streamlit as st
-import firebase_admin
-from firebase_admin import auth, credentials, exceptions
-from firebase_config import initialize_firebase
-from streamlit_extras.colored_header import colored_header
-from streamlit_lottie import st_lottie
-from PIL import Image
-import requests
 import os
 import json
-import base64  # Import base64 module
+import base64
+import google.auth
+from google.cloud import secretmanager
+import firebase_admin
+from firebase_admin import credentials, auth, exceptions
+import streamlit as st
+from streamlit_extras.colored_header import colored_header
+from streamlit_lottie import st_lottie
+import requests
 
-# 🔥 Load Firebase credentials from environment variable
-firebase_json_base64 = os.getenv("FIREBASE_CREDENTIALS")
+# ==================== 🔥 Securely Load Firebase Credentials ====================
+def get_firebase_credentials():
+    """Retrieves Firebase credentials securely from Google Secret Manager."""
+    secret_name = os.getenv("FIREBASE_SECRET_NAME")  # Get secret name from app.yaml
+    if not secret_name:
+        raise ValueError("🔥 Firebase secret name not set!")
 
-if firebase_json_base64:
-    # Decode Base64 string to JSON string
-    firebase_json_str = base64.b64decode(firebase_json_base64).decode("utf-8")
-    
-    # Convert JSON string to dictionary
-    firebase_creds = json.loads(firebase_json_str)
-    
-    # Initialize Firebase
-    cred = credentials.Certificate(firebase_creds)
-    
-    if not firebase_admin._apps:
-        firebase_admin.initialize_app(cred)
-else:
-    raise ValueError("🔥 Firebase credentials not found! Set the FIREBASE_CREDENTIALS environment variable in Render.")
+    # Authenticate with Google Cloud
+    _, project = google.auth.default()
+    client = secretmanager.SecretManagerServiceClient()
+    secret_path = f"projects/{project}/secrets/{secret_name}/versions/latest"
 
-# Initialize Firebase
-initialize_firebase()
+    # Access the secret
+    response = client.access_secret_version(name=secret_path)
+    secret_payload = response.payload.data.decode("utf-8")  # Decode secret
 
+    return json.loads(secret_payload)  # Convert to dictionary
+
+# 🔐 Initialize Firebase Securely
 if not firebase_admin._apps:
-    cred = credentials.Certificate("customerchurnprediction-f7a4c-firebase-adminsdk-fbsvc-7602b1226a.json")
+    firebase_creds = get_firebase_credentials()
+    cred = credentials.Certificate(firebase_creds)
     firebase_admin.initialize_app(cred)
 
-# Page Config
-st.set_page_config(page_title="Login", page_icon="🔑", layout="centered")
+# ==================== 🎨 Streamlit UI Config ====================
+st.set_page_config(page_title="Customer Churn Prediction", page_icon="🔑", layout="centered")
 
-
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8501))  # Default Streamlit port
-    #st.write(f"Starting Streamlit on port {port}...")
-
-
-# Load Lottie Animation Function
+# ==================== 🎬 Load Lottie Animations ====================
 def load_lottie_url(url):
-    response = requests.get(url)
-    if response.status_code == 200:
-        return response.json()
-    else:
+    try:
+        r = requests.get(url)
+        if r.status_code == 200:
+            return r.json()
+        else:
+            return None
+    except requests.exceptions.RequestException as e:
+        print(f"Error loading Lottie animation: {e}")
         return None
 
-# Load Animations
-login_animation = load_lottie_url("https://assets3.lottiefiles.com/packages/lf20_jcikwtux.json")  # User login animation
+# Load animations safely
+login_animation = load_lottie_url("https://assets3.lottiefiles.com/packages/lf20_jcikwtux.json")  # Login animation
 success_animation = load_lottie_url("https://assets7.lottiefiles.com/packages/lf20_hy4txm7l.json")  # Success animation
 
-# # App Logo
-# image = Image.open("churn.jpg")  # Ensure you have a logo file
-# st.image(image, width=150)
-
-# App Title
+# ==================== 🔐 Login UI ====================
 st.title("Customer Churn Prediction")
 
 # UI Header
@@ -75,7 +68,7 @@ with st.form("login_form", clear_on_submit=False):
     password = st.text_input("🔑 Password", type="password", placeholder="Enter your password", help="Use your Firebase-registered password", key="password")
     login_btn = st.form_submit_button("Login 🚀")
 
-# Authentication Logic
+# ==================== 🔐 Authentication Logic ====================
 if login_btn:
     try:
         user = auth.get_user_by_email(email)
@@ -99,3 +92,8 @@ if login_btn:
 if "user" in st.session_state:
     st.info("✅ Redirecting to Dashboard...")
     st.switch_page("pages/dashboard.py")
+
+# ==================== 🚀 Run Streamlit on Correct Port ====================
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8080))  # Default Google Cloud port
+    #st.write(f"Starting Streamlit on port {port}...")
