@@ -7,6 +7,26 @@ from streamlit_lottie import st_lottie
 from PIL import Image
 import requests
 import os
+import json
+import base64  # Import base64 module
+
+# 🔥 Load Firebase credentials from environment variable
+firebase_json_base64 = os.getenv("FIREBASE_CREDENTIALS")
+
+if firebase_json_base64:
+    # Decode Base64 string to JSON string
+    firebase_json_str = base64.b64decode(firebase_json_base64).decode("utf-8")
+    
+    # Convert JSON string to dictionary
+    firebase_creds = json.loads(firebase_json_str)
+    
+    # Initialize Firebase
+    cred = credentials.Certificate(firebase_creds)
+    
+    if not firebase_admin._apps:
+        firebase_admin.initialize_app(cred)
+else:
+    raise ValueError("🔥 Firebase credentials not found! Set the FIREBASE_CREDENTIALS environment variable in Render.")
 
 # Initialize Firebase
 initialize_firebase()
