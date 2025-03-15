@@ -5,6 +5,7 @@ from streamlit_extras.colored_header import colored_header
 from streamlit_lottie import st_lottie
 from PIL import Image
 import requests
+import os
 
 # Initialize Firebase
 if not firebase_admin._apps:
@@ -13,6 +14,12 @@ if not firebase_admin._apps:
 
 # Page Config
 st.set_page_config(page_title="Login", page_icon="🔑", layout="centered")
+
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8501))  # Default Streamlit port
+    st.write(f"Starting Streamlit on port {port}...")
+
 
 # Load Lottie Animation Function
 def load_lottie_url(url):
