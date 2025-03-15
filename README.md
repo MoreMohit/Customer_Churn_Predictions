@@ -10,6 +10,25 @@ Predict customer churn for a telecom company using **machine learning models** a
 
 ---
 
+## 🚀 What I Worked for these project  
+
+📌 **Enhanced Model & Features**  
+✔️ Fixed missing feature alignment issue during predictions  
+✔️ Implemented proper one-hot encoding for categorical variables  
+✔️ Ensured numerical features were correctly scaled with **StandardScaler**  
+
+📌 **Improved UI & Insights**  
+✔️ Added **animations** using Lottie for better user experience  
+✔️ Displayed **churn probability graph** using Plotly bar chart  
+✔️ Optimized **feature importance** visualization in the insights page  
+
+📌 **Performance Fixes**  
+✔️ Addressed **DataFrame fragmentation** issue for better performance  
+✔️ Optimized **feature engineering pipeline** in preprocessing  
+✔️ Ensured consistent feature names across training & prediction  
+
+---
+
 ## 🏆 Features  
 ✅ **Customer Churn Prediction** – Identify customers likely to leave  
 ✅ **Machine Learning Models** – Logistic Regression, XGBoost, Random Forest  
@@ -48,24 +67,17 @@ Predict customer churn for a telecom company using **machine learning models** a
 git clone https://github.com/MoreMohit/customer-churn-prediction.git
 cd customer-churn-prediction
 
-📌 Set Up a Virtual Environment
+# 📌 Set Up a Virtual Environment
 python -m venv .venv
 source .venv/bin/activate  # Mac/Linux
 .venv\Scripts\activate     # Windows
 
-📌 Install Dependencies
-
+# 📌 Install Dependencies
 pip install -r requirements.txt
 
-
-📌 Run the Streamlit Web App
-
+# 📌 Run the Streamlit Web App
 streamlit run app.py
-
 
 🌎 Deployment
 🚀 Live Demo: Click here
 📂 Dataset: Download
-
-🤝 Connect With Me
-

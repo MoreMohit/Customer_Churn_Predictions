@@ -1,11 +1,19 @@
+# Web App & Deployment
 streamlit
+gunicorn  
+
+# Data Processing
 numpy
 pandas
-joblib
+
+# Machine Learning
 scikit-learn
+xgboost
+joblib  
+
+# Visualization & UI Enhancements
 matplotlib
 seaborn
-xgboost
 plotly
-gunicorn
-
+streamlit-lottie  # For Lottie animations
+requests  # Fetch Lottie animations
