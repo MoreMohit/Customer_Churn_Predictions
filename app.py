@@ -18,7 +18,7 @@ st.set_page_config(page_title="Login", page_icon="🔑", layout="centered")
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8501))  # Default Streamlit port
-    st.write(f"Starting Streamlit on port {port}...")
+    #st.write(f"Starting Streamlit on port {port}...")
 
 
 # Load Lottie Animation Function
