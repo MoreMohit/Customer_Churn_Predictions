@@ -1,47 +1,33 @@
 import streamlit as st
+
 # ==================== 🎨 Streamlit UI Config ====================
 st.set_page_config(page_title="Customer Churn Prediction", page_icon="🔑", layout="centered")
 
 
-import os
-import json
-import google.auth
-from google.cloud import secretmanager
 import firebase_admin
 from firebase_admin import credentials, auth, exceptions
+import os
+import json
 from streamlit_extras.colored_header import colored_header
 from streamlit_lottie import st_lottie
 import requests
 
 
-# ==================== 🔥 Securely Load Firebase Credentials ====================
-def get_firebase_credentials():
-    """Retrieves Firebase credentials securely from Google Secret Manager."""
-    secret_name = os.getenv("FIREBASE_SECRET_NAME", "firebase-creds")  # Default to "firebase-creds"
-    
-    try:
-        # Authenticate with Google Cloud
-        _, project = google.auth.default()
-        client = secretmanager.SecretManagerServiceClient()
-        secret_path = f"projects/{project}/secrets/{secret_name}/versions/latest"
 
-        # Access the secret
-        response = client.access_secret_version(name=secret_path)
-        secret_payload = response.payload.data.decode("utf-8")  # Decode secret
-
-        return json.loads(secret_payload)  # Convert to dictionary
-    except Exception as e:
-        st.error(f"⚠️ Failed to load Firebase credentials: {str(e)}")
-        return None
+# ✅ Define Local Firebase Credentials Path
+firebase_cred_path = "config/firebase_creds.json"  # Update this path
 
 # 🔐 Initialize Firebase Securely (Only If Not Already Initialized)
 if not firebase_admin._apps:
-    firebase_creds = get_firebase_credentials()
-    if firebase_creds:
-        cred = credentials.Certificate(firebase_creds)
-        firebase_admin.initialize_app(cred)
+    if os.path.exists(firebase_cred_path):
+        try:
+            cred = credentials.Certificate(firebase_cred_path)
+            firebase_admin.initialize_app(cred)
+            st.success("🔥 Firebase initialized successfully!")
+        except Exception as e:
+            st.error(f"❌ Failed to initialize Firebase: {str(e)}")
     else:
-        st.error("🔥 Firebase credentials missing! Check Google Secret Manager.")
+        st.error(f"🔥 Firebase credentials file not found! Expected at: {firebase_cred_path}")
 
 # ==================== 🎬 Load Lottie Animations ====================
 def load_lottie_url(url):
