@@ -1,6 +1,7 @@
 import streamlit as st
 import firebase_admin
 from firebase_admin import auth, credentials, exceptions
+from firebase_config import initialize_firebase
 from streamlit_extras.colored_header import colored_header
 from streamlit_lottie import st_lottie
 from PIL import Image
@@ -8,6 +9,8 @@ import requests
 import os
 
 # Initialize Firebase
+initialize_firebase()
+
 if not firebase_admin._apps:
     cred = credentials.Certificate("customerchurnprediction-f7a4c-firebase-adminsdk-fbsvc-7602b1226a.json")
     firebase_admin.initialize_app(cred)
