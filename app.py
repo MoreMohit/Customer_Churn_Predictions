@@ -32,7 +32,7 @@ def get_firebase_credentials():
         st.error(f"⚠️ Failed to load Firebase credentials: {str(e)}")
         return None
 
-# 🔐 Initialize Firebase Securely
+# 🔐 Initialize Firebase Securely (Only If Not Already Initialized)
 if not firebase_admin._apps:
     firebase_creds = get_firebase_credentials()
     if firebase_creds:

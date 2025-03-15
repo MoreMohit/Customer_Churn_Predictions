@@ -1,27 +1,18 @@
-# Web App & Deployment
 streamlit
-gunicorn  
-
-# Data Processing
 numpy
 pandas
-
-# Machine Learning
+joblib
 scikit-learn
-xgboost
-joblib  
-
-# Visualization & UI Enhancements
 matplotlib
 seaborn
+xgboost
 plotly
-streamlit-lottie  # For Lottie animations
-requests  # Fetch Lottie animations
-
-
+gunicorn
+firebase-admin
 google-auth
 google-auth-oauthlib
 google-auth-httplib2
-firebase-admin
-
+google-cloud-secret-manager
+requests
+streamlit-lottie
 streamlit-extras
