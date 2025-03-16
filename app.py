@@ -17,23 +17,21 @@ import json
 from streamlit_extras.colored_header import colored_header
 from streamlit_lottie import st_lottie
 import requests
+import base64
 
 
 
-# ✅ Define Local Firebase Credentials Path
-firebase_cred_path = "config/firebase_creds.json"  # Update this path
+ #🔥 Load Firebase Credentials from Streamlit Secrets
+if "firebase" in st.secrets:
+    firebase_creds_base64 = st.secrets["firebase"]["credentials_base64"]
+    firebase_creds_json = json.loads(base64.b64decode(firebase_creds_base64).decode())
 
-# 🔐 Initialize Firebase Securely (Only If Not Already Initialized)
-if not firebase_admin._apps:
-    if os.path.exists(firebase_cred_path):
-        try:
-            cred = credentials.Certificate(firebase_cred_path)
-            firebase_admin.initialize_app(cred)
-            st.success("🔥 Firebase initialized successfully!")
-        except Exception as e:
-            st.error(f"❌ Failed to initialize Firebase: {str(e)}")
-    else:
-        st.error(f"🔥 Firebase credentials file not found! Expected at: {firebase_cred_path}")
+    # 🔐 Initialize Firebase (Only If Not Already Initialized)
+    if not firebase_admin._apps:
+        cred = credentials.Certificate(firebase_creds_json)
+        firebase_admin.initialize_app(cred)
+else:
+    st.error("❌ Firebase credentials missing! Please add them to `.streamlit/secrets.toml`.")
 
 # ==================== 🎬 Load Lottie Animations ====================
 def load_lottie_url(url):
