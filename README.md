@@ -79,5 +79,5 @@ pip install -r requirements.txt
 streamlit run app.py
 
 🌎 Deployment
-🚀 Live Demo: Click here
+🚀 Live Demo: https://customer-churn-app-53185040035.asia-south1.run.app/
 📂 Dataset: Download
