@@ -10,7 +10,18 @@ Predict customer churn for a telecom company using **machine learning models** a
 
 ---
 
-## 🚀 What I Worked for these project  
+## 🌎 Deployment 
+
+Email: mohitrmore14@gmail.com
+Password: !RWvPCcE5S7aj!M
+
+🚀 **Live Demo:** [Customer Churn App](https://customer-churn-app-53185040035.asia-south1.run.app/)  
+
+📂 **Dataset:** [Download Here](https://github.com/MoreMohit/customer-churn-prediction/raw/main/WA_Fn-UseC_-Telco-Customer-Churn.csv)  
+
+---
+
+## 🚀 What I Worked on This Project  
 
 📌 **Enhanced Model & Features**  
 ✔️ Fixed missing feature alignment issue during predictions  
@@ -34,7 +45,7 @@ Predict customer churn for a telecom company using **machine learning models** a
 ✅ **Machine Learning Models** – Logistic Regression, XGBoost, Random Forest  
 ✅ **Real-time Predictions** – Interactive UI via **Streamlit**  
 ✅ **Data Visualization** – Correlation heatmaps, feature importance plots  
-✅ **Cloud Deployment** – Hosted using **Streamlit Cloud / AWS / Render**  
+✅ **Cloud Deployment** – Hosted using **Google Cloud Run**  
 
 ---
 
@@ -46,7 +57,7 @@ Predict customer churn for a telecom company using **machine learning models** a
 | **Machine Learning**   | ![Scikit-learn](https://img.shields.io/badge/Scikit--learn-F7931E?logo=scikit-learn&logoColor=white) **Scikit-learn**, ![XGBoost](https://img.shields.io/badge/XGBoost-EB3C00?logo=xgboost&logoColor=white) **XGBoost** |  
 | **Data Processing**    | ![Pandas](https://img.shields.io/badge/Pandas-150458?logo=pandas&logoColor=white) **Pandas**, ![NumPy](https://img.shields.io/badge/NumPy-013243?logo=numpy&logoColor=white) **NumPy** |  
 | **Data Visualization** | ![Matplotlib](https://img.shields.io/badge/Matplotlib-11557C?logo=matplotlib&logoColor=white) **Matplotlib**, ![Seaborn](https://img.shields.io/badge/Seaborn-3776AB?logo=python&logoColor=white) **Seaborn** |  
-| **Web App Deployment** | ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?logo=streamlit&logoColor=white) **Streamlit**, ![AWS](https://img.shields.io/badge/AWS-232F3E?logo=amazon-aws&logoColor=white) **AWS** |  
+| **Web App Deployment** | ![Google Cloud](https://img.shields.io/badge/Google%20Cloud-4285F4?logo=google-cloud&logoColor=white) **Google Cloud Run**, ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?logo=streamlit&logoColor=white) **Streamlit** |  
 
 ---
 
@@ -56,7 +67,7 @@ Predict customer churn for a telecom company using **machine learning models** a
 2️⃣ **Feature Engineering** 🔍 – Encode categorical data, scale numerical features  
 3️⃣ **Model Training** 🤖 – Train ML models (Logistic Regression, XGBoost, Random Forest)  
 4️⃣ **Evaluation** 📉 – Compare accuracy, precision, recall, and AUC-ROC  
-5️⃣ **Deployment** 🚀 – Deploy with **Streamlit** for real-time use  
+5️⃣ **Deployment** 🚀 – Deploy with **Google Cloud Run**  
 
 ---
 
@@ -66,6 +77,7 @@ Predict customer churn for a telecom company using **machine learning models** a
 ```sh
 git clone https://github.com/MoreMohit/customer-churn-prediction.git
 cd customer-churn-prediction
+
 
 # 📌 Set Up a Virtual Environment
 python -m venv .venv
@@ -78,6 +90,3 @@ pip install -r requirements.txt
 # 📌 Run the Streamlit Web App
 streamlit run app.py
 
-🌎 Deployment
-🚀 Live Demo: 
-📂 Dataset: Download
