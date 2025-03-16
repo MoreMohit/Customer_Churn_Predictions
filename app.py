@@ -21,14 +21,26 @@ import base64
 
 
 
-# 🔥 Load Firebase Credentials from Streamlit Secrets
-firebase_creds_base64 = st.secrets["firebase"]["credentials_base64"]
-firebase_creds_json = json.loads(base64.b64decode(firebase_creds_base64).decode())
+# # 🔥 Load Firebase Credentials from Streamlit Secrets
+# firebase_creds_base64 = st.secrets["firebase"]["credentials_base64"]
+# firebase_creds_json = json.loads(base64.b64decode(firebase_creds_base64).decode())
 
-# 🔐 Initialize Firebase
-if not firebase_admin._apps:
-    cred = credentials.Certificate(firebase_creds_json)
-    firebase_admin.initialize_app(cred)
+# # 🔐 Initialize Firebase
+# if not firebase_admin._apps:
+#     cred = credentials.Certificate(firebase_creds_json)
+#     firebase_admin.initialize_app(cred)
+
+# 🔥 Load Firebase Credentials from Streamlit Secrets
+if "firebase" in st.secrets:
+    firebase_creds_base64 = st.secrets["firebase"]["credentials_base64"]
+    firebase_creds_json = json.loads(base64.b64decode(firebase_creds_base64).decode())
+
+    # 🔐 Initialize Firebase
+    if not firebase_admin._apps:
+        cred = credentials.Certificate(firebase_creds_json)
+        firebase_admin.initialize_app(cred)
+else:
+    st.error("🔥 Firebase credentials missing! Add them in Streamlit Cloud secrets.")
         
 # ==================== 🎬 Load Lottie Animations ====================
 def load_lottie_url(url):
@@ -78,10 +90,15 @@ if login_btn:
         st_lottie(success_animation, height=150, key="success_animation")
 
         # Store session (to persist login)
-        st.session_state["user"] = user.email
+        #st.session_state["user"] = user.email
 
-        # Placeholder for page switch (Streamlit does not support direct navigation)
-        st.info("✅ Redirecting to Dashboard... Please select 'Dashboard' from the sidebar.")
+        # # Placeholder for page switch (Streamlit does not support direct navigation)
+        # st.info("✅ Redirecting to Dashboard... Please select 'Dashboard' from the sidebar.")
+
+        # Store session (to persist login)
+        st.session_state["user"] = user.email
+        st.switch_page("pages/dashboard.py")
+        
 
     except auth.UserNotFoundError:
         st.error("❌ User not found. Please check your email or register first.")
