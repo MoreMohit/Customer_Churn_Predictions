@@ -1,8 +1,10 @@
 import streamlit as st
 import os
-import os
-os.environ["STREAMLIT_SERVER_PORT"] = "8080"
+
+# Force Streamlit to use the correct port and address
+os.environ["STREAMLIT_SERVER_PORT"] = "8501"
 os.environ["STREAMLIT_SERVER_ADDRESS"] = "0.0.0.0"
+
 
 
 # ==================== 🎨 Streamlit UI Config ====================
