@@ -1,5 +1,5 @@
 [server]
-port = 8501  # Default Streamlit port
+port = 8080  # Default Streamlit port
 address = "0.0.0.0"
 enableCORS = false
 enableXsrfProtection = false
