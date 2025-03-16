@@ -1,14 +1,24 @@
+# runtime: python39
+# entrypoint: streamlit run app.py --server.port=8080 --server.address=0.0.0.0
+# instance_class: F2  # Choose an appropriate instance size
+
+# env_variables:
+#   FIREBASE_SECRET_NAME: "firebase-creds"  # Store secret name only
+
+# automatic_scaling:
+#   target_cpu_utilization: 0.65
+#   min_instances: 1
+#   max_instances: 5
+
+# handlers:
+#   - url: /.*
+#     script: auto
+#     secure: always
+
+
 runtime: python39
-entrypoint: streamlit run app.py --server.port=8080 --server.address=0.0.0.0
-instance_class: F2  # Choose an appropriate instance size
-
-env_variables:
-  FIREBASE_SECRET_NAME: "firebase-creds"  # Store secret name only
-
-automatic_scaling:
-  target_cpu_utilization: 0.65
-  min_instances: 1
-  max_instances: 5
+entrypoint: streamlit run app.py
+instance_class: F2  # Adjust based on your needs
 
 handlers:
   - url: /.*

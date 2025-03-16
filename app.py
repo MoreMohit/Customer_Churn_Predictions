@@ -1,4 +1,9 @@
 import streamlit as st
+import os
+import os
+os.environ["STREAMLIT_SERVER_PORT"] = "8080"
+os.environ["STREAMLIT_SERVER_ADDRESS"] = "0.0.0.0"
+
 
 # ==================== 🎨 Streamlit UI Config ====================
 st.set_page_config(page_title="Customer Churn Prediction", page_icon="🔑", layout="centered")
@@ -6,7 +11,6 @@ st.set_page_config(page_title="Customer Churn Prediction", page_icon="🔑", lay
 
 import firebase_admin
 from firebase_admin import credentials, auth, exceptions
-import os
 import json
 from streamlit_extras.colored_header import colored_header
 from streamlit_lottie import st_lottie
@@ -87,7 +91,7 @@ if login_btn:
     except exceptions.FirebaseError as e:
         st.error(f"🔥 Authentication failed: {str(e)}")
 
-# ==================== 🚀 Run Streamlit on Correct Port ====================
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8080))  # Default Google Cloud Run port
-    os.system(f"streamlit run app.py --server.port={port} --server.address=0.0.0.0")
+# # ==================== 🚀 Run Streamlit on Correct Port ====================
+# if __name__ == "__main__":
+#     port = int(os.environ.get("PORT", 8080))  # Default Google Cloud Run port
+#     os.system(f"streamlit run app.py --server.port={port} --server.address=0.0.0.0")
