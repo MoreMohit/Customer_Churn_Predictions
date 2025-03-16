@@ -21,25 +21,14 @@ import base64
 
 
 
-# ✅ Check if Streamlit Secrets contain Firebase credentials
-if "firebase" in st.secrets and "credentials_base64" in st.secrets["firebase"]:
-    try:
-        # ✅ Load and Decode Base64 credentials
-        firebase_creds_base64 = st.secrets["firebase"]["credentials_base64"]
-        firebase_creds_json = json.loads(base64.b64decode(firebase_creds_base64).decode("utf-8"))
+# 🔥 Load Firebase Credentials from Streamlit Secrets
+firebase_creds_base64 = st.secrets["firebase"]["credentials_base64"]
+firebase_creds_json = json.loads(base64.b64decode(firebase_creds_base64).decode())
 
-        # ✅ Initialize Firebase
-        if not firebase_admin._apps:
-            cred = credentials.Certificate(firebase_creds_json)
-            firebase_admin.initialize_app(cred)
-
-        st.success("🔥 Firebase initialized successfully!")
-
-    except Exception as e:
-        st.error(f"❌ Failed to initialize Firebase: {str(e)}")
-
-else:
-    st.error("❌ Firebase credentials missing! Please add them to `.streamlit/secrets.toml` or set them in Streamlit Cloud App Settings.")
+# 🔐 Initialize Firebase
+if not firebase_admin._apps:
+    cred = credentials.Certificate(firebase_creds_json)
+    firebase_admin.initialize_app(cred)
         
 # ==================== 🎬 Load Lottie Animations ====================
 def load_lottie_url(url):
