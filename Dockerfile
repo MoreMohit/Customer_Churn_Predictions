@@ -7,6 +7,8 @@ WORKDIR /app
 # Copy project files
 COPY . /app
 
+COPY Best_Model_Forest.pkl /app/Best_Model_Forest.pkl
+
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
