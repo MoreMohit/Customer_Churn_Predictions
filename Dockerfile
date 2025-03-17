@@ -15,8 +15,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Ensure model file is available
 RUN ls -l /app/
 
-# Copy the correct new model file
-COPY Best_Model_Forest_New.pkl /app/Best_Model_Forest_New.pkl
+COPY Best_Model_Forest_new.pkl /app/Best_Model_Forest_new.pkl
+
 
 # Set environment variables
 ENV STREAMLIT_SERVER_PORT=8080
