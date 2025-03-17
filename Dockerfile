@@ -4,19 +4,14 @@ FROM python:3.9
 # Set the working directory
 WORKDIR /app
 
-# Copy only requirements first (for caching dependencies)
+# Copy only requirements first (to use Docker's layer caching)
 COPY requirements.txt /app/
 
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-
-
-# Ensure model file is available
-RUN ls -l /app/
-
-COPY Best_Model_Forest_new.pkl /app/Best_Model_Forest_new.pkl
-
+# Copy the entire project (including model file)
+COPY . /app
 
 # Set environment variables
 ENV STREAMLIT_SERVER_PORT=8080
