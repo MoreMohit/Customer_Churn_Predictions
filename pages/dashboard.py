@@ -1,5 +1,6 @@
 import streamlit as st
 import pickle
+import os
 import pandas as pd
 import numpy as np
 import plotly.express as px
@@ -11,8 +12,16 @@ from sklearn.preprocessing import StandardScaler
 # 🎨 Streamlit Config
 st.set_page_config(page_title="Customer Churn Dashboard", page_icon="📊", layout="wide")
 
-# 🔄 Load Model, Scaler & Features
-with open("Best_Model_Forest_new.pkl", "rb") as f:
+# # 🔄 Load Model, Scaler & Features
+# with open("Best_Model_Forest_new.pkl", "rb") as f:
+#     model = pickle.load(f)
+
+model_path = "/home/g22113014/Customer_Churn_Predictions/Best_Model_Forest_new.pkl"  # Correct path inside the container
+
+if not os.path.exists(model_path):
+    raise FileNotFoundError(f"❌ Model file not found at: {model_path}")
+
+with open(model_path, "rb") as f:
     model = pickle.load(f)
 
 with open("scaler.pkl", "rb") as f:
