@@ -9,10 +9,12 @@ xgboost
 plotly
 gunicorn
 firebase-admin
+google-cloud-firestore
 google-auth
 google-auth-oauthlib
 google-auth-httplib2
 google-cloud-secret-manager
 requests
-streamlit-lottie
+
 streamlit-extras
+streamlit-lottie
